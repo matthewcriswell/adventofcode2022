@@ -10,10 +10,10 @@ def eval_string(my_string):
     test_list = []
     for x, i in enumerate(my_list, 1):
         test_list.append(i)
-        if len(set(test_list)) == 4:
+        if len(set(test_list)) == 14:
             print(f'Sequence detected: {x}')
             break
-        if x >= 4:
+        if x >= 14:
             test_list.pop(0)
 
 
