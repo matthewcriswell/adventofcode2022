@@ -49,12 +49,17 @@ for instruction in instructions:
    crates = int(instruction.split()[1])
    source_key = instruction.split()[3]
    dest_key = instruction.split()[5]
+   #print("BEFORE: ", box_redux)
    print(f"move {crates} crates from {source_key} to {dest_key}")
+   payload = []
    for i in range(crates):
-       print(f"popping off {source_key}")
-       payload = box_redux[source_key].pop()
-       print(f"appending to {dest_key}")
-       box_redux[dest_key].append(payload)
+       #print(f"popping off {source_key}")
+       payload.append(box_redux[source_key].pop())
+       #print(f"appending to {dest_key}")
+       #box_redux[dest_key].append(payload)
+   #print(f"PAYLOAD: appending {payload} to {dest_key}")
+   box_redux[dest_key] += payload[::-1]
+   #print("AFTER: ", box_redux)
 
 output = []
 for entry in box_redux.values():
