@@ -1,0 +1,52 @@
+''' calculate file size statistics based on fake shell output '''
+
+from file_size import File, Directory
+class FileKeyError(Exception): pass
+
+INPUT = 'test.txt'
+with open(INPUT, 'rt') as infile:
+    contents = infile.readlines()
+
+fs_dict = {}
+work_dir = ''
+files_dict = {}
+for entry in contents:
+    item = entry.strip()
+    print(f'item: {item}, item[0]: {item[0]}')
+    if item[0] == '$':
+        print(f'COMMAND: {item}')
+        temp_item = item.split()
+        if temp_item[1] == 'cd':
+            print("change dir")
+            print(f"{temp_item[2]}")
+            if temp_item[2] == '/':
+                 print("kick it root down") 
+                 work_dir = '/'
+                 #fs_dict[work_dir] = []
+                 my_fs = Directory('/',0)
+            elif temp_item[2] == '..':
+                 print("back out a dir")
+                 work_dir = work_dir[:-2]
+                 print(f"work_dir now {work_dir}")
+            else:
+                 print(f"entering {temp_item[2]}") 
+                 work_dir = work_dir + temp_item[2] + '/'
+                 try:
+                     #fs_dict[work_dir] = []
+                     files_dict[work_dir] = Directory(work_dir,0)
+                     my_fs.add_items(files_dict[work_dir])
+                 except:
+                     raise FileKeyError  
+        if temp_item[1] == 'ls':
+            print("list dir")
+    elif item[0:3] == 'dir':
+        print(f'DIRECTORY: {item}')    
+    else:
+        print(f'FILE: {item}')
+        file_path = work_dir + item[1]
+        file_obj = File(item[1],item[0])
+        try:
+            fs_dict[file_path].append(item)
+            file_dict[work_dir].add_items(file_obj)
+        except:
+            print("fs_dict error")
