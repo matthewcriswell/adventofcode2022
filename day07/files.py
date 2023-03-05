@@ -41,9 +41,12 @@ for line in cli_output:
     else:
         journal[''.join(work_dir)].add(File(line[1], int(line[0])))
 
-journal['/'].get_size()
-DIRS_TOTAL = 0
+free_space = 70000000 - journal['/'].get_size()
+space_needed = 30000000 - free_space
+
+dir_sizes = []
 for i in journal:
-    if journal[i].file_size <= 100000:
-        DIRS_TOTAL += journal[i].file_size
-print(DIRS_TOTAL)
+    if journal[i].file_size > space_needed:
+        dir_sizes.append(journal[i].file_size)
+dir_sizes.sort()
+print(dir_sizes[0])
