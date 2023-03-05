@@ -33,7 +33,7 @@ for line in cli_output:
         if test_key not in journal:
             journal[test_key] = Directory(test_key)
             journal[''.join(work_dir)].add(journal[test_key])
-    # else is must be a file
+    # else must be a file
     else:
         journal[''.join(work_dir)].add(File(line[1], int(line[0])))
 
