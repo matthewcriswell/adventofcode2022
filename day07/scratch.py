@@ -49,7 +49,7 @@ class File(Component):
         return self.file_size
 
 
-class Directory:
+class Directory(Component):
     ''' "composite" class '''
 
     def __init__(self, name: str):
