@@ -1,5 +1,6 @@
 class File:
-    def __init__(self, name, file_size = 0):
+
+    def __init__(self, name, file_size=0):
         self.name = name
         self.file_size = file_size
 
@@ -29,6 +30,7 @@ class File:
 
 
 class Directory:
+
     def __init__(self, name):
         self.name = name
         self.children = []
@@ -52,7 +54,7 @@ class Directory:
         if not isinstance(value, int):
             raise TypeError('Expected int')
         self._file_size = value
-    
+
     def add(self, component):
         self.children.append(component)
         component.parent = self
@@ -67,7 +69,7 @@ class Directory:
     def operation(self) -> int:
         self.file_size = 0
         for item in self.children:
-            if isinstance(item,Directory):
+            if isinstance(item, Directory):
                 item.operation()
             self.file_size += item.file_size
         return self.file_size
@@ -76,12 +78,13 @@ class Directory:
         output = []
         for item in self.children:
             if isinstance(item, Directory):
-                print((item.name,item.file_size))
+                print((item.name, item.file_size))
                 item.special_operation()
                 #item.special_operation()
                 #if item.file_size >= 100000:
-                    #output.append((item.file_size,item.special_operation()))
+                #output.append((item.file_size,item.special_operation()))
         #return output
+
 
 if __name__ == '__main__':
     # testing
