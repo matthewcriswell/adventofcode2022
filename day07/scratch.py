@@ -1,28 +1,3 @@
-#from __future__ import annotations
-#from abc import ABC, abstractmethod
-#from typing import List
-
-class Test:
-
-    def __init__(self, name):
-        self.name = name
-
-    def greeting(self):
-        print(f"Howdy, {self.name}!")
-
-    @property
-    def age(self):
-        return self._age
-
-    @age.setter
-    def age(self, value):
-        if not isinstance(value, int):
-            raise TypeError('Expected int')
-        self._age = value
-
-#class Component:
-#    pass
-
 class File:
     def __init__(self, name, file_size = 0):
         self.name = name
@@ -109,10 +84,7 @@ class Directory:
         #return output
 
 if __name__ == '__main__':
-    # test it out
-    person = Test('matt')
-    person.greeting()
-
+    # testing
     f1 = File('f1', 10000)
     f2 = File('f2', 150000)
     f3 = File('f3', 2000000)
