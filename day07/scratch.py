@@ -34,7 +34,7 @@ class Component(ABC):
         return False
 
     @abstractmethod
-    def operation(self) -> int:
+    def get_size(self) -> int:
         pass
 
 
@@ -45,7 +45,7 @@ class File(Component):
         self.name = name
         self.file_size = file_size
 
-    def operation(self) -> int:
+    def get_size(self) -> int:
         return self.file_size
 
 
@@ -69,11 +69,11 @@ class Directory:
     def is_composite(self) -> bool:
         return True
 
-    def operation(self) -> int:
+    def get_size(self) -> int:
         self.file_size = 0
         for item in self.children:
             if isinstance(item, Directory):
-                item.operation()
+                item.get_size()
             self.file_size += item.file_size
         return self.file_size
 

@@ -41,7 +41,7 @@ for line in cli_output:
     else:
         journal[''.join(work_dir)].add(File(line[1], int(line[0])))
 
-journal['/'].operation()
+journal['/'].get_size()
 DIRS_TOTAL = 0
 for i in journal:
     if journal[i].file_size <= 100000:
