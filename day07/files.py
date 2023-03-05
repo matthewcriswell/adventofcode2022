@@ -9,8 +9,12 @@ with open(INPUT, 'rt', encoding='UTF-8') as infile:
 
 cli_output = [line.split() for line in [entry.strip() for entry in contents]]
 
+# keep track of current working dir
 work_dir = []
+
+# journal of directories
 journal = {}
+
 for line in cli_output:
     # check if command
     if line[0] == '$':
